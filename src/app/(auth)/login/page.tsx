@@ -44,7 +44,7 @@ const LoginPage = () => {
           if (submitError) setSubmitError("");
         }}
         onSubmit={form.handleSubmit(onSubmit)}
-        className="w-full flex flex-col justify-center h-screen items-center sm:w-[400px] space-y-6  mx-auto"
+        className="w-full flex flex-col justify-center h-screen items-center sm:w-[400px] space-y-6 mx-auto"
       >
         <Link href="/" className="w-full flex items-center justify-center">
           <span className="font-semibold dark:text-white text-4xl ml-2">
