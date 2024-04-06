@@ -26,7 +26,7 @@ const LoginPage = () => {
   const form = useForm<z.infer<typeof FormSchema>>({
     mode: "onChange",
     resolver: zodResolver(FormSchema),
-    defaultValues: { email: "", password: "" },
+    defaultValues: { phone: "", password: "" },
   });
 
   const isLoading = form.formState.isSubmitting;
@@ -52,19 +52,19 @@ const LoginPage = () => {
           </span>
         </Link>
         <FormDescription className="text-foreground/60">
-          Welcome to Shop Sphere
+          Log in to Shop Sphere
         </FormDescription>
         <FormField
           disabled={isLoading}
           control={form.control}
-          name="email"
+          name="phone"
           render={({ field }) => (
             <FormItem>
               <FormControl>
                 <Input
                   className="sm:w-[400px]"
-                  type="email"
-                  placeholder="Email"
+                  type="number"
+                  placeholder="Number"
                   {...field}
                 />
               </FormControl>

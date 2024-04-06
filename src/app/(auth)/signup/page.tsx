@@ -24,7 +24,11 @@ import { FormSchema } from "@/lib/types";
 
 const SignUpSchema = z
   .object({
-    email: z.string().describe("Email").email({ message: "Invalid email" }),
+    phone: z
+      .string()
+      .describe("Phone")
+      .min(11, "Enter correct phone number")
+      .max(14, "Enter correct phone number"),
     password: z
       .string()
       .describe("Password")
@@ -63,12 +67,12 @@ const Signup = () => {
   const form = useForm<z.infer<typeof SignUpSchema>>({
     mode: "onChange",
     resolver: zodResolver(SignUpSchema),
-    defaultValues: { email: "", password: "", confirmPassword: "" },
+    defaultValues: { phone: "", password: "", confirmPassword: "" },
   });
 
   const isLoading = form.formState.isSubmitting;
 
-  const onSubmit = async ({ email, password }: z.infer<typeof FormSchema>) => {
+  const onSubmit = async ({ phone, password }: z.infer<typeof FormSchema>) => {
     setConfirmation(true);
   };
 
@@ -87,21 +91,21 @@ const Signup = () => {
           </span>
         </Link>
         <FormDescription className="text-foreground/60">
-          Welcome to Shop Sphere
+          Sign up to Shop Sphere
         </FormDescription>
         {!confirmation && !codeExchangeError && (
           <>
             <FormField
               disabled={isLoading}
               control={form.control}
-              name="email"
+              name="phone"
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
                     <Input
                       className="sm:w-[400px]"
-                      type="email"
-                      placeholder="Email"
+                      type="number"
+                      placeholder="Phone Number"
                       {...field}
                     />
                   </FormControl>
