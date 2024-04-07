@@ -1,3 +1,4 @@
+import DashHeader from "@/components/shared/dashHeader";
 import { ReactNode } from "react";
 
 const DashboardLayout = ({
@@ -5,7 +6,12 @@ const DashboardLayout = ({
 }: Readonly<{
   children: ReactNode;
 }>) => {
-  return <div>{children}</div>;
+  return (
+    <div>
+      <DashHeader />
+      {children}
+    </div>
+  );
 };
 
 export default DashboardLayout;
