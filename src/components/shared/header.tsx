@@ -51,20 +51,25 @@ const Header = () => {
   };
 
   return (
-    <div className="py-4 px-4 bg-slate-200">
+    <div className="py-4 bg-slate-200">
       <nav className="flex justify-between items-center container mx-auto">
         <Link href="/">
           <h2 className="text-xl font-semibold">Shop Sphere</h2>
         </Link>
-        <button
-          onClick={() => setIsOpen(true)}
-          className="relative mr-4 md:mr-0"
-        >
-          <FaCartPlus size={22} />
-          <p className="absolute font-medium -top-3 -right-4 z-10 bg-sky-500/70 text-sm rounded-full px-1.5">
-            {cartTotalItem}
-          </p>
-        </button>
+        <div className="flex items-center gap-5">
+          <Link href="/dashboard">
+            <div>Dashboard</div>
+          </Link>
+          <button
+            onClick={() => setIsOpen(true)}
+            className="relative mr-4 md:mr-0"
+          >
+            <FaCartPlus size={22} />
+            <p className="absolute font-medium -top-3 -right-4 z-10 bg-sky-500/70 text-sm rounded-full px-1.5">
+              {cartTotalItem}
+            </p>
+          </button>
+        </div>
       </nav>
 
       <Modal isOpen={isOpen} setIsOpen={setIsOpen} title="Cart Item">
@@ -76,9 +81,9 @@ const Header = () => {
                 className="group transition-all p-3 shadow-md duration-300"
               >
                 <div className="flex items-center gap-5 ">
-                  <div className="relative flex justify-center items-center w-20">
+                  <div className="flex justify-center items-center w-20">
                     <Image
-                      className=" duration-500 object-contain"
+                      className="object-contain"
                       src={item.image}
                       alt={item?.title}
                       width={50}
@@ -109,7 +114,7 @@ const Header = () => {
                           -
                         </button>
                       </div>
-                      <p>x</p>${item?.price}
+                      <p>x</p>$ {item?.price}
                     </div>
                   </div>
 
@@ -134,7 +139,7 @@ const Header = () => {
         <div className="flex justify-between mt-10">
           <p className="text-lg text-gray-700 font-medium">SubTotal</p>
           <p className="text-xl font-semibold text-gray-700">
-            ${total.toFixed(2)}
+            $ {total.toFixed(2)}
           </p>
         </div>
 

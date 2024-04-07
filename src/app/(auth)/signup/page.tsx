@@ -45,24 +45,8 @@ const SignUpSchema = z
 
 const Signup = () => {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const [submitError, setSubmitError] = useState("");
   const [confirmation, setConfirmation] = useState(false);
-
-  const codeExchangeError = useMemo(() => {
-    if (!searchParams) return "";
-    return searchParams.get("error_description");
-  }, [searchParams]);
-
-  const confirmationAndErrorStyle = useMemo(
-    () =>
-      clsx("bg-primary", {
-        "bg-red-500/10": codeExchangeError,
-        "border-red-500/50": codeExchangeError,
-        "text-red-700": codeExchangeError,
-      }),
-    []
-  );
 
   const form = useForm<z.infer<typeof SignUpSchema>>({
     mode: "onChange",
@@ -93,7 +77,7 @@ const Signup = () => {
         <FormDescription className="text-foreground/60">
           Sign up to Shop Sphere
         </FormDescription>
-        {!confirmation && !codeExchangeError && (
+        {!confirmation && (
           <>
             <FormField
               disabled={isLoading}
@@ -163,19 +147,6 @@ const Signup = () => {
             Login
           </Link>
         </span>
-        {(confirmation || codeExchangeError) && (
-          <>
-            <Alert className={confirmationAndErrorStyle}>
-              {!codeExchangeError && <MailCheck className="size-4" />}
-              <AlertTitle>
-                {codeExchangeError ? "Invalid Link" : "Check your email"}
-              </AlertTitle>
-              <AlertDescription>
-                {codeExchangeError || "An email confirmation has been sent."}
-              </AlertDescription>
-            </Alert>
-          </>
-        )}
       </form>
     </Form>
   );

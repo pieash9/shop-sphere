@@ -7,6 +7,7 @@ import { FaStar } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { getSingleProduct } from "@/utils/api/products";
 import { addToCart } from "@/redux/features/cartSlice";
+import { Button } from "@/components/ui/button";
 
 const ProductDetails = async ({ params }: { params: { id: string } }) => {
   const dispatch = useAppDispatch();
@@ -62,12 +63,9 @@ const ProductDetails = async ({ params }: { params: { id: string } }) => {
           <div className=" text-sm ">{product?.description}</div>
         </div>
         <div className="mt-8">
-          <button
-            onClick={() => handleAddToCart(product!)}
-            className="bg-orange-400 hover:bg-orange-500 text-white font-bold py-2 px-4 rounded-md focus:outline-none"
-          >
+          <Button onClick={() => handleAddToCart(product!)} className="">
             Add to Cart
-          </button>
+          </Button>
         </div>
       </motion.div>
       {!product && <div className="text-center">Product not found.</div>}
