@@ -14,6 +14,8 @@ import { IProduct } from "@/utils/types/product.types";
 import Image from "next/image";
 import Modal from "../ui/modal";
 import { Button } from "../ui/button";
+import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
+import { Menu } from "lucide-react";
 
 const Header = () => {
   const { cart } = useAppSelector((state) => state.cart);
@@ -52,13 +54,19 @@ const Header = () => {
 
   return (
     <div className="py-4 bg-slate-200">
-      <nav className="flex justify-between items-center container mx-auto">
+      <nav className="md:flex justify-between items-center container mx-auto hidden flex-col gap-6 text-lg font-medium md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
         <Link href="/">
           <h2 className="text-xl font-semibold">Shop Sphere</h2>
         </Link>
         <div className="flex items-center gap-5">
           <Link href="/dashboard">
             <div>Dashboard</div>
+          </Link>
+          <Link href="/login">
+            <div>login</div>
+          </Link>
+          <Link href="/signup">
+            <div>Sign up</div>
           </Link>
           <button
             onClick={() => setIsOpen(true)}
@@ -71,6 +79,40 @@ const Header = () => {
           </button>
         </div>
       </nav>
+
+      <Sheet>
+        <SheetTrigger asChild>
+          <Button variant="outline" size="icon" className="shrink-0 md:hidden">
+            <Menu className="h-5 w-5" />
+            <span className="sr-only">Toggle navigation menu</span>
+          </Button>
+        </SheetTrigger>
+        <SheetContent side="left">
+          <nav className="grid gap-6 text-lg font-medium">
+            <Link href="/">
+              <h2 className="text-xl font-semibold">Shop Sphere</h2>
+            </Link>
+            <Link href="/dashboard">
+              <div>Dashboard</div>
+            </Link>
+            <Link href="/login">
+              <div>login</div>
+            </Link>
+            <Link href="/signup">
+              <div>Sign up</div>
+            </Link>
+            <button
+              onClick={() => setIsOpen(true)}
+              className="relative mr-4 md:mr-0"
+            >
+              <FaCartPlus size={22} />
+              <p className="absolute font-medium -top-3 left-5 z-10 bg-sky-500/70 text-sm rounded-full px-1.5">
+                {cartTotalItem}
+              </p>
+            </button>
+          </nav>
+        </SheetContent>
+      </Sheet>
 
       <Modal isOpen={isOpen} setIsOpen={setIsOpen} title="Cart Item">
         <div className="mt-2 grid grid-cols-1 gap-5">

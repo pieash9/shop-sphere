@@ -23,13 +23,14 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getAllUsers } from "@/utils/api/user";
 import { IUser } from "@/utils/types/user.types";
+import { IProduct } from "@/utils/types/product.types";
+import { getAllProducts } from "@/utils/api/products";
 
 const Dashboard = async () => {
   const users: IUser[] = await getAllUsers();
+  const orders: IProduct[] = await getAllProducts();
   return (
     <div className="flex min-h-screen w-full flex-col">
       <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
@@ -42,7 +43,7 @@ const Dashboard = async () => {
               <DollarSign className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">$45,231.89</div>
+              <div className="text-2xl font-bold">$4,540.89</div>
               <p className="text-xs text-muted-foreground">
                 +20.1% from last month
               </p>
@@ -131,24 +132,26 @@ const Dashboard = async () => {
           </Card>
           <Card x-chunk="dashboard-01-chunk-5">
             <CardHeader>
-              <CardTitle>Recent order</CardTitle>
+              <CardTitle>Recent orders</CardTitle>
             </CardHeader>
             <CardContent className="grid gap-8">
-              <div className="flex items-center gap-4">
-                <Avatar className="hidden h-9 w-9 sm:flex">
-                  <AvatarImage src="/avatars/01.png" alt="Avatar" />
-                  <AvatarFallback>OM</AvatarFallback>
-                </Avatar>
-                <div className="grid gap-1">
-                  <p className="text-sm font-medium leading-none">
-                    Olivia Martin
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    olivia.martin@email.com
-                  </p>
-                </div>
-                <div className="ml-auto font-medium">+$1,999.00</div>
-              </div>
+              {orders &&
+                orders.slice(0, 5).map((order) => (
+                  <div
+                    key={order.id}
+                    className="flex items-center justify-between gap-4"
+                  >
+                    <div className="grid gap-1">
+                      <p className="text-sm font-medium leading-none">
+                        0000{order.id}
+                      </p>
+                      <p className="text-sm text-muted-foreground line-clamp-1">
+                        {order.title}
+                      </p>
+                    </div>
+                    <div>${order.price}</div>
+                  </div>
+                ))}
             </CardContent>
           </Card>
         </div>

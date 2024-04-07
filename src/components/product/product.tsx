@@ -26,7 +26,7 @@ const Product = ({ products }: { products: IProduct[] }) => {
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.3 }}
-                className="shadow-md border rounded"
+                className="shadow-md rounded"
               >
                 <div className="h-[20rem]">
                   <Link href={`/product-details/${product?.id}`}>
